@@ -1,0 +1,128 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+    {
+        "label": "cmake",
+        "type": "shell",
+        "command": "cmake3",
+        "args": [
+            "-G", "'Unix Makefiles'", "-DCMAKE_BUILD_TYPE=Debug", "../../src"
+        ],
+        "options": {
+            "cwd": "${workspaceRoot}/build/src"
+        },
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "make",
+        "type": "shell",
+        "command": "make -j 8",
+        "options": {
+            "cwd": "${workspaceRoot}/build/src"
+        },
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    },        
+    {
+        "label": "run",
+        "type": "shell",
+        "command": "./contoso_exe",
+        "options": {
+            "cwd": "${workspaceRoot}/build/src"
+        },
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "buildmake",
+        "type": "shell",
+        "command": "./buildmakerun.sh",
+        "options": {
+            "cwd": "${workspaceRoot}/build/src"
+        },
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "buildmakeruntest",
+        "type": "shell",
+        "command": "./buildmakerun.sh",
+        "options": {
+            "cwd": "${workspaceRoot}/build/test"
+        },
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "cmaketest",
+        "type": "shell",
+        "command": "cmake3",
+        "args": [
+            "-G", "'Unix Makefiles'", "-DCMAKE_BUILD_TYPE=Debug", "../../test"
+        ],
+        "options": {
+            "cwd": "${workspaceRoot}/build/test"
+        },
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "maketest",
+        "type": "shell",
+        "command": "make",
+        "args": [
+            "-j", "8"
+        ],
+        "options": {
+            "cwd": "${workspaceRoot}/build/test"
+        },
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "runTests",
+        "type": "shell",
+        "command": "./runTests",
+        "options": {
+            "cwd": "${workspaceRoot}/build/test/config"
+        },
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        }
+    },
+    {
+        "label": "clean",
+        "type": "shell",
+        "command": "make",
+        "options": {
+            "cwd": "${workspaceRoot}/build"
+        },
+        "args": [
+            "clean"
+        ]
+    },
+    {
+        "label": "compile w/o makefile",
+        "type": "shell",
+        "command": "c++ -Wall -g helloworld.cpp -o hello"
+    }
+    ]
+}
